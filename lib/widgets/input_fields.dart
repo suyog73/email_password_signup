@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:email_password_signup/helpers/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +37,7 @@ class InputField extends StatelessWidget {
         //     color: Colors.redAccent,
         //   ),
         // ),
-        SizedBox(height: 5),
+        const SizedBox(height: 5),
         TextFormField(
           textInputAction: textInputAction,
           onChanged: onChange,
@@ -50,7 +48,7 @@ class InputField extends StatelessWidget {
           validator: validator,
           keyboardType: textInputType,
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
       ],
     );
   }

@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-
 import 'package:email_password_signup/helpers/validators.dart';
 import 'package:email_password_signup/screens/home_screen.dart';
 import 'package:email_password_signup/screens/registration_screen.dart';
@@ -8,6 +6,7 @@ import 'package:email_password_signup/widgets/logo_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -76,12 +75,12 @@ class _LoginScreenState extends State<LoginScreen> {
               color: Colors.redAccent.withOpacity(0.5),
               spreadRadius: 1,
               blurRadius: 5,
-              offset: Offset(0, 0), // changes position of shadow
+              offset: const Offset(0, 0), // changes position of shadow
             ),
           ],
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 12),
+        child: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 12),
           child: Text(
             'Login',
             style: TextStyle(
@@ -100,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              LogoImage(),
+              const LogoImage(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40.0),
                 child: Form(
@@ -108,25 +107,25 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     children: [
                       emailField,
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       passwordField,
-                      SizedBox(height: 30),
+                      const SizedBox(height: 30),
                       loginButton,
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Don\'t have an account?'),
+                          const Text('Don\'t have an account?'),
                           InkWell(
                             onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => RegistrationScreen(),
+                                  builder: (context) => const RegistrationScreen(),
                                 ),
                               );
                             },
-                            child: Text(
+                            child: const Text(
                               ' Sign Up',
                               style: TextStyle(
                                 fontSize: 16,
@@ -157,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
             .then((uid) => {
                   Fluttertoast.showToast(msg: "Login Successful"),
                   Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => HomeScreen())),
+                      MaterialPageRoute(builder: (context) => const HomeScreen())),
                 });
       } on FirebaseAuthException catch (error) {
         switch (error.code) {

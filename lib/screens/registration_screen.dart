@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_password_signup/helpers/validators.dart';
 import 'package:email_password_signup/models/user_model.dart';
@@ -108,12 +106,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               color: Colors.redAccent.withOpacity(0.5),
               spreadRadius: 1,
               blurRadius: 5,
-              offset: Offset(0, 0), // changes position of shadow
+              offset: const Offset(0, 0), // changes position of shadow
             ),
           ],
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 12),
+        child: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 12),
           child: Text(
             'SignUp',
             style: TextStyle(
@@ -132,7 +130,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              LogoImage(),
+              const LogoImage(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40.0),
                 child: Form(
@@ -140,29 +138,29 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   child: Column(
                     children: [
                       usernameField,
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       emailField,
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       passwordField,
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       cPasswordField,
-                      SizedBox(height: 30),
+                      const SizedBox(height: 30),
                       signupButton,
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Already have an account?'),
+                          const Text('Already have an account?'),
                           InkWell(
                             onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => LoginScreen(),
+                                  builder: (context) => const LoginScreen(),
                                 ),
                               );
                             },
-                            child: Text(
+                            child: const Text(
                               ' Login',
                               style: TextStyle(
                                 fontSize: 16,
@@ -221,7 +219,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => HomeScreen(),
+        builder: (context) => const HomeScreen(),
       ),
     );
   }

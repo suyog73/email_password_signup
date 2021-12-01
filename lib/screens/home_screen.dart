@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_password_signup/helpers/constants.dart';
 import 'package:email_password_signup/models/user_model.dart';
@@ -56,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Colors.redAccent.withOpacity(0.5),
               spreadRadius: 1,
               blurRadius: 5,
-              offset: Offset(0, 0), // changes position of shadow
+              offset: const Offset(0, 0), // changes position of shadow
             ),
           ],
         ),
@@ -64,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: const [
               Icon(Icons.logout, color: Colors.white),
               SizedBox(width: 5),
               Text(
@@ -83,27 +81,27 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Welcome', style: TextStyle(fontSize: 28)),
+        title: const Text('Welcome', style: TextStyle(fontSize: 28)),
         centerTitle: true,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            LogoImage(),
-            Text(
+            const LogoImage(),
+            const Text(
               'Welcome Back',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             Text(loggedInUser.username ?? username ?? 'Loading...',
                 style: kTextStyle),
             Text(loggedInUser.email ?? email ?? 'Leading...',
                 style: kTextStyle),
-            SizedBox(height: 55),
+            const SizedBox(height: 55),
             logoutButton,
           ],
         ),
@@ -119,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => LoginScreen(),
+        builder: (context) => const LoginScreen(),
       ),
     );
   }
