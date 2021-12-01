@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "465946797016",
+    "project_id": "emailpasswordauth-d91ff",
+    "storage_bucket": "emailpasswordauth-d91ff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:465946797016:android:b81db99d531170e46a48ad",
+        "android_client_info": {
+          "package_name": "com.example.email_password_signup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "465946797016-mincom6c33nnjtvvqq5ejrbpq1pmgubd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.email_password_signup",
+            "certificate_hash": "67473227e3b9caff338194a4446ba2c114fbc524"
+          }
+        },
+        {
+          "client_id": "465946797016-ns2cu6qkd0h74pjfopperc6gnchrneph.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIozQX9OaGKCT153Ut-mRcGdS-nuV-8m8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "465946797016-ns2cu6qkd0h74pjfopperc6gnchrneph.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
