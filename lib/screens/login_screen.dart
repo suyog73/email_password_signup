@@ -121,7 +121,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const RegistrationScreen(),
+                                  builder: (context) =>
+                                      const RegistrationScreen(),
                                 ),
                               );
                             },
@@ -148,15 +149,15 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
 // login function
-  void signIn(String email, String password) async {
+  Future<void> signIn(String email, String password) async {
     if (_formKey.currentState!.validate()) {
       try {
         await _auth
             .signInWithEmailAndPassword(email: email, password: password)
             .then((uid) => {
                   Fluttertoast.showToast(msg: "Login Successful"),
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => const HomeScreen())),
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const HomeScreen())),
                 });
       } on FirebaseAuthException catch (error) {
         switch (error.code) {

@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_password_signup/helpers/validators.dart';
-import 'package:email_password_signup/models/user_model.dart';
 import 'package:email_password_signup/screens/home_screen.dart';
 import 'package:email_password_signup/screens/login_screen.dart';
 import 'package:email_password_signup/widgets/input_fields.dart';
@@ -202,17 +201,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = _auth.currentUser;
-    UserModel userModel = UserModel();
 
-    userModel.uid = user!.uid;
-    userModel.email = user.email;
-    userModel.password = passwordController.text;
-    userModel.username = usernameController.text;
-
-    await firebaseFirestore
-        .collection('users')
-        .doc(user.uid)
-        .set(userModel.toMap());
+    await firebaseFirestore.collection('users').doc(user!.uid).set({
+      "email": user.email,
+      "password": passwordController.text,
+      "username": usernameController.text,
+      "uid": user.uid,
+    });
 
     Fluttertoast.showToast(msg: 'Account created successfully');
 

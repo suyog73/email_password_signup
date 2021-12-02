@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_password_signup/helpers/constants.dart';
-import 'package:email_password_signup/models/user_model.dart';
 import 'package:email_password_signup/screens/login_screen.dart';
 import 'package:email_password_signup/widgets/logo_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,25 +14,24 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  User? user = FirebaseAuth.instance.currentUser;
-  UserModel loggedInUser = UserModel();
-
   String? username;
   String? email;
 
-  @override
-  void initState() {
-    super.initState();
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(user!.uid)
-        .get()
-        .then((value) {
-      loggedInUser = UserModel.fromMap(value.data());
-      setState(() {});
-      email = value.data()!['email'];
-      username = value.data()!['username'];
-    });
+  Future getData() async {
+    var fireStore = FirebaseFirestore.instance;
+    final firebaseUser = FirebaseAuth.instance.currentUser;
+    if (firebaseUser != null) {
+      await fireStore
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .get()
+          .then((value) {
+        username = value.data()!['username'];
+        email = value.data()!['email'];
+      }).catchError((error) {
+        throw (error);
+      });
+    }
   }
 
   @override
@@ -97,10 +95,26 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(height: 15),
-            Text(loggedInUser.username ?? username ?? 'Loading...',
-                style: kTextStyle),
-            Text(loggedInUser.email ?? email ?? 'Leading...',
-                style: kTextStyle),
+            FutureBuilder(
+              future: getData(),
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Column(
+                    children: const [
+                      Text('Loading...', style: kTextStyle),
+                      Text('Leading...', style: kTextStyle),
+                    ],
+                  );
+                } else {
+                  return Column(
+                    children: [
+                      Text('$username', style: kTextStyle),
+                      Text('$email', style: kTextStyle),
+                    ],
+                  );
+                }
+              },
+            ),
             const SizedBox(height: 55),
             logoutButton,
           ],
