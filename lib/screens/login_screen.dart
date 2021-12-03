@@ -62,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
     // login button
     final loginButton = InkWell(
       onTap: () {
-        signIn(emailController.text, passwordController.text);
+        signIn();
       },
       child: Container(
         alignment: Alignment.center,
@@ -149,16 +149,20 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
 // login function
-  Future<void> signIn(String email, String password) async {
+  Future<void> signIn() async {
     if (_formKey.currentState!.validate()) {
       try {
         await _auth
-            .signInWithEmailAndPassword(email: email, password: password)
-            .then((uid) => {
-                  Fluttertoast.showToast(msg: "Login Successful"),
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const HomeScreen())),
-                });
+            .signInWithEmailAndPassword(
+                email: emailController.text, password: passwordController.text)
+            .then(
+              (uid) => {
+                Fluttertoast.showToast(msg: "Login Successful"),
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                ),
+              },
+            );
       } on FirebaseAuthException catch (error) {
         switch (error.code) {
           case "invalid-email":
@@ -186,5 +190,16 @@ class _LoginScreenState extends State<LoginScreen> {
         Fluttertoast.showToast(msg: errorMessage!);
       }
     }
+  }
+
+  Widget showSpinner() {
+    return Container(
+      color: Colors.white,
+      child: const Center(
+        child: CircularProgressIndicator(
+          color: Colors.redAccent,
+        ),
+      ),
+    );
   }
 }

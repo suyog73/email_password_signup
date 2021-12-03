@@ -3,7 +3,10 @@ import 'package:email_password_signup/helpers/constants.dart';
 import 'package:email_password_signup/screens/login_screen.dart';
 import 'package:email_password_signup/widgets/logo_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String? username;
   String? email;
 
+  // get data from firebase using uid
   Future getData() async {
     var fireStore = FirebaseFirestore.instance;
     final firebaseUser = FirebaseAuth.instance.currentUser;
@@ -39,7 +43,75 @@ class _HomeScreenState extends State<HomeScreen> {
     // logout button
     final logoutButton = InkWell(
       onTap: () {
-        logout(context);
+        showDialog(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Image(
+                    image: AssetImage('assets/images/logo.png'),
+                    width: 50,
+                    height: 50,
+                  ),
+                  SizedBox(width: 15),
+                  Text('App Name'),
+                ],
+              ),
+              content: const Text('Do you want to logout from app'),
+              actions: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.redAccent,
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 18.0, vertical: 8),
+                          child: Text(
+                            'No',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 15),
+                    InkWell(
+                      onTap: () {
+                        logout(context);
+                      },
+                      child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.redAccent),
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 12.0, vertical: 6),
+                            child: Text(
+                              'Yes',
+                              style: TextStyle(fontWeight: FontWeight.w600),
+                            ),
+                          )),
+                    ),
+                  ],
+                ),
+              ],
+            );
+          },
+        );
       },
       child: Container(
         alignment: Alignment.center,
@@ -123,6 +195,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  // SignOut method
   Future<void> logout(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
 
